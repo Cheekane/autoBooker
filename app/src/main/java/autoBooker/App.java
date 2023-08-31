@@ -51,7 +51,7 @@ public class App {
         // text of target checkbox
         String coursesCheckboxText = "Thames Valley Golf Club Hickory";
 
-        By checkboxByText = By.xpath("//div[text(),'" + coursesCheckboxText + "']");
+        By checkboxByText = By.xpath("//input[text(),'" + coursesCheckboxText + "']");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(checkboxByText));
 
