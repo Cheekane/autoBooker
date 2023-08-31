@@ -6,22 +6,67 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class App {
     public static void book(String e, String p) {
+
+        // create WebDriver obj "driver" and set to ChromeDriver
         WebDriver driver = new ChromeDriver();
 
+        // maximize the window
+        driver.manage().window().maximize();
+        // request ChromeDriver to request HTTP for golf website
         driver.get("https://city-of-london-golf-courses.book.teeitup.golf/login");
-        driver.findElement(By.id("txtUsername1")).sendKeys(e);
-        driver.findElement(By.id("txtPassword1")).sendKeys(p);
+
+        // create By object and get the username element on login
+        By usernameBy = By.id("txtUsername");
+
+        // wait setting of max 15 s to hold for pull up delay
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.presenceOfElementLocated(usernameBy));
+
+        // driver finds username and password element and sends email and password
+        driver.findElement(usernameBy).sendKeys(e);
+        driver.findElement(By.id("txtPassword")).sendKeys(p);
+
+        // create button object for the button element and find by the className and click
+        WebElement lgnButton = driver.findElement(By.className("MuiButton-label"));
+        lgnButton.click();
+
+        // finds button to open side menu by xpath
+        By optButtonByTestId = By.xpath("//button[@data-testid='teetimes-filter-expand']");
+
+        // waits for the presence of element of optButtonByTestId
+        wait.until(ExpectedConditions.presenceOfElementLocated(optButtonByTestId));
+
+        // sets dateButton to the button element and clicks
+        WebElement dateButton = driver.findElement(optButtonByTestId);
+        dateButton.click();
+
+        // text of target checkbox
+        String coursesCheckboxText = "Thames Valley Golf Club Hickory";
+
+        By checkboxByText = By.xpath("//div[text(),'" + coursesCheckboxText + "']");
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(checkboxByText));
+
+        WebElement coursesCheckbox = driver.findElement(checkboxByText);
+        coursesCheckbox.click();
+
 
         driver.quit();
     }
 
+
     public static void main(String[] args) {
 
-        String[] email = {"g.nahan", "gina"};
-        String[] password = {"ar1"};
+        String[] email = {"e1", "e2"};
+        String[] password = {"p"};
 
         for (int i = 0; i < 1; i++) {
             book(email[i], password[0]);
