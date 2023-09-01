@@ -10,7 +10,11 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class App {
     public static void book(String e, String p) {
@@ -20,6 +24,7 @@ public class App {
 
         // maximize the window
         driver.manage().window().maximize();
+
         // request ChromeDriver to request HTTP for golf website
         driver.get("https://city-of-london-golf-courses.book.teeitup.golf/login");
 
@@ -38,26 +43,30 @@ public class App {
         WebElement lgnButton = driver.findElement(By.className("MuiButton-label"));
         lgnButton.click();
 
-        // finds button to open side menu by xpath
-        By optButtonByTestId = By.xpath("//button[@data-testid='teetimes-filter-expand']");
+        // to get the next week date
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
 
-        // waits for the presence of element of optButtonByTestId
-        wait.until(ExpectedConditions.presenceOfElementLocated(optButtonByTestId));
+        calendar.add(Calendar.DAY_OF_WEEK, 7);
+        Date nextWeekDate = calendar.getTime();
 
-        // sets dateButton to the button element and clicks
-        WebElement dateButton = driver.findElement(optButtonByTestId);
-        dateButton.click();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        // text of target checkbox
-        String coursesCheckboxText = "Thames Valley Golf Club Hickory";
+        String nextWeekFormattedDate = dateFormat.format(nextWeekDate);
 
-        By checkboxByText = By.xpath("//input[text(),'" + coursesCheckboxText + "']");
+        By userLoggedIn = By.xpath("//button[@data-testid='core-user-profile']");
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(checkboxByText));
+        wait.until(ExpectedConditions.presenceOfElementLocated(userLoggedIn));
 
-        WebElement coursesCheckbox = driver.findElement(checkboxByText);
-        coursesCheckbox.click();
+        // get the website with all the appropriate settings (9 AM - 11 AM, 3-4 golfers, next week)
+        driver.get("https://city-of-london-golf-courses.book.teeitup.golf/?course=9710&date=" + nextWeekDate + "&end=20&golfers=3,4&holes=18&start=09");
 
+        By bookNowClassName = By.xpath("//button[@data-testid='teetimes_book_now_button']");
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(bookNowClassName));
+        WebElement bookButton = driver.findElement(bookNowClassName);
+
+        bookButton.click();
 
         driver.quit();
     }
@@ -65,8 +74,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        String[] email = {"e1", "e2"};
-        String[] password = {"p"};
+        String[] email = {"g.nahan75@gmail.com", "ginahan@hotmail.com"};
+        String[] password = {"ar1eth2ac"};
 
         for (int i = 0; i < 1; i++) {
             book(email[i], password[0]);
