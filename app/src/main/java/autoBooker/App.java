@@ -12,8 +12,9 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class App {
     public static void book(String e, String p) {
@@ -31,7 +32,7 @@ public class App {
         By usernameById = By.id("txtUsername");
 
         // wait setting of max 15 s to hold for pull up delay
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(usernameById));
 
         // driver finds username and password element and sends email and password
@@ -46,41 +47,40 @@ public class App {
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
 
+        // takes calendar and adds 7 days
         calendar.add(Calendar.DAY_OF_WEEK, 7);
         Date nextWeekDate = calendar.getTime();
-
+        // makes calendar into yyyy-MM-dd format
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         String nextWeekFormattedDate = dateFormat.format(nextWeekDate);
 
         By userLoggedInByXpath = By.xpath("//button[@data-testid='core-user-profile']");
-
+        // wait for user profile button element to check if page is loaded
         wait.until(ExpectedConditions.presenceOfElementLocated(userLoggedInByXpath));
 
         // get the website with all the appropriate settings (9 AM - 11 AM, 3-4 golfers, next week)
-        driver.get("https://city-of-london-golf-courses.book.teeitup.golf/?course=9710&date=" + nextWeekDate + "&end=15&golfers=3,4&holes=18&start=09");
+        driver.get("https://city-of-london-golf-courses.book.teeitup.golf/?course=9710&date=" + nextWeekDate + "&end=11&golfers=3,4&holes=18&start=09");
+        By bookNowByXpath = By.xpath("//button[@data-testid='teetimes_book_now_button']");
 
+        // gets book button
         try {
-            By bookNowByXpath = By.xpath("//button[@data-testid='teetimes_book_now_button']");
-
             wait.until(ExpectedConditions.presenceOfElementLocated(bookNowByXpath));
 
             WebElement bookButton = driver.findElement(bookNowByXpath);
             bookButton.click();
         }
-        catch (NoSuchElementException exception) {
+        // catches exception if button element is not present and finds times from 11 AM - 3 PM
+        catch (Exception exception) {
             System.out.println("No available time from 9 AM to 11 AM");
-            driver.get("https://city-of-london-golf-courses.book.teeitup.golf/?course=9710&date=" + nextWeekDate + "&end=20&golfers=3,4&holes=18&start=09");
-
-        }
-        finally {
-            System.out.println("No availble time from 11 AM to 3 PM");
-            driver.quit();
+            driver.get("https://city-of-london-golf-courses.book.teeitup.golf/?course=9710&date=" + nextWeekDate + "&end=15&golfers=3,4&holes=18&start=11");
         }
 
+        // selects the "4 golfers" option
         WebElement numGolfersButton = driver.findElement(By.xpath("//button[@data-testid=\"button-value-4\"]"));
         numGolfersButton.click();
 
+        // selects checkout button
         By checkoutButtonByXpath = By.xpath("//button[@data-testid=\"modal-rate-proceed-to-checkout-btn\"]");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(checkoutButtonByXpath));
@@ -88,6 +88,7 @@ public class App {
         WebElement proceedCheckoutButton = driver.findElement(checkoutButtonByXpath);
         proceedCheckoutButton.click();
 
+        // selects and clicks agreement to terms button
         By agreeTermsByName = By.name("chb-nm");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(agreeTermsByName));
@@ -95,6 +96,7 @@ public class App {
         WebElement agreeTermsCheckbox = driver.findElement(agreeTermsByName);
         agreeTermsCheckbox.click();
 
+        // selects and clicks the purchase button
         By purchaseButtonByXpath = By.xpath("//button[@data-testid=\"make-your-reservation-btn\"]");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(purchaseButtonByXpath));
@@ -107,14 +109,9 @@ public class App {
 
 
     public static void main(String[] args) {
+        String email = "g";
+        String password = "a";
 
-        String[] email = {"g", "g"};
-        String[] password = {"a"};
-
-        for (int i = 0; i < 1; i++) {
-            book(email[i], password[0]);
-
-        }
-
+        book(email, password);
     }
 }
