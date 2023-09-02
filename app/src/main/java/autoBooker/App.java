@@ -63,7 +63,7 @@ public class App {
         driver.get("https://city-of-london-golf-courses.book.teeitup.golf/?course=9710&date=" + nextWeekDate + "&end=11&golfers=3,4&holes=18&start=09");
         By bookNowByXpath = By.xpath("//button[@data-testid='teetimes_book_now_button']");
 
-        // gets book button
+        // gets book button element and tries to click
         try {
             wait.until(ExpectedConditions.presenceOfElementLocated(bookNowByXpath));
 
@@ -81,7 +81,7 @@ public class App {
         WebElement numGolfersButton = driver.findElement(By.xpath("//button[@data-testid=\"button-value-4\"]"));
         numGolfersButton.click();
 
-        // selects checkout button
+        // selects and clicks checkout button
         By checkoutButtonByXpath = By.xpath("//button[@data-testid=\"modal-rate-proceed-to-checkout-btn\"]");
 
         wait.until(ExpectedConditions.presenceOfElementLocated(checkoutButtonByXpath));
