@@ -7,12 +7,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.NoSuchElementException;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public class App {
@@ -58,7 +58,7 @@ public class App {
         wait.until(ExpectedConditions.presenceOfElementLocated(userLoggedInByXpath));
 
         // get the website with all the appropriate settings (9 AM - 11 AM, 3-4 golfers, next week)
-        driver.get("https://city-of-london-golf-courses.book.teeitup.golf/?course=9710&date=" + nextWeekDate + "&end=11&golfers=3,4&holes=18&start=09");
+        driver.get("https://city-of-london-golf-courses.book.teeitup.golf/?course=9710&date=" + nextWeekDate + "&end=15&golfers=3,4&holes=18&start=09");
 
         try {
             By bookNowByXpath = By.xpath("//button[@data-testid='teetimes_book_now_button']");
@@ -68,7 +68,7 @@ public class App {
             WebElement bookButton = driver.findElement(bookNowByXpath);
             bookButton.click();
         }
-        catch (NotFoundException exception) {
+        catch (NoSuchElementException exception) {
             System.out.println("No available time from 9 AM to 11 AM");
             driver.get("https://city-of-london-golf-courses.book.teeitup.golf/?course=9710&date=" + nextWeekDate + "&end=20&golfers=3,4&holes=18&start=09");
 
@@ -108,8 +108,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        String[] email = {"g", "g"};
-        String[] password = {"a"};
+        String[] email = {"g.nahan75@gmail.com", "ginahan@hotmail.com"};
+        String[] password = {"ar1eth2ac"};
 
         for (int i = 0; i < 1; i++) {
             book(email[i], password[0]);
