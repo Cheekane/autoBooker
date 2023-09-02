@@ -72,6 +72,7 @@ public class App {
         }
         // catches exception if button element is not present and finds times from 11 AM - 3 PM
         catch (Exception exception) {
+            driver.quit(); // REMOVE THIS IF YOU WANT 11 AM - 3 PM
             System.out.println("No available time from 9 AM to 11 AM");
             driver.get("https://city-of-london-golf-courses.book.teeitup.golf/?course=9710&date=" + nextWeekDate + "&end=15&golfers=3,4&holes=18&start=11");
         }
@@ -109,8 +110,8 @@ public class App {
 
 
     public static void main(String[] args) {
-        String email = "g";
-        String password = "a";
+        String email = "g.nahan75@gmail.com";
+        String password = "ar1eth2ac";
 
         book(email, password);
     }
