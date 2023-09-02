@@ -108,8 +108,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        String[] email = {"g.nahan75@gmail.com", "ginahan@hotmail.com"};
-        String[] password = {"ar1eth2ac"};
+        String[] email = {"g", "g"};
+        String[] password = {"a"};
 
         for (int i = 0; i < 1; i++) {
             book(email[i], password[0]);
