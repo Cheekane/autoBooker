@@ -17,6 +17,7 @@ public class ElementHandler {
         this.driver = driver;
     }
 
+    // gets element and waits for presenceOfElementLocated for 10 seconds
     protected WebElement getElement(By by) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(by));

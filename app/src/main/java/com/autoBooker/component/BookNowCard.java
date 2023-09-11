@@ -9,16 +9,13 @@ public class BookNowCard extends ElementHandler {
     private final String xPath;
     private String timeAsText;
 
-    /*
-    needs WebDriver and XPath
-     */
+    // needs WebDriver and XPath
     public BookNowCard(WebDriver driver, String xPath) {
         super(driver); // call parent constructor with the driver parameter "WebDriver driver"
         this.xPath = xPath;
     }
-    /*
-    need to get the time of the BookNowCard returns timeAsText
-     */
+
+    // need to get the time of the BookNowCard returns timeAsText
     public String getTimeAsString() {
         if(this.timeAsText == null) {
             WebElement time = getElement(By.xpath(xPath + "//p[@data-testid='teetimes-tile-time'"));
@@ -34,9 +31,7 @@ public class BookNowCard extends ElementHandler {
         return Integer.parseInt(time.split(":")[0]); // gets the hours after splitting, hence "[0]"
     }
 
-    /*
-    gets the hours in 24 hrs time
-     */
+    // gets the hours in 24 hrs time
     public int getFullHr() {
         int hr;
         String timeAsText = getTimeAsString();
@@ -59,4 +54,7 @@ public class BookNowCard extends ElementHandler {
         return hr * 60 + min;
     }
 
+    public void bookNow() {
+        click(By.xpath(this.xPath));
+    }
 }

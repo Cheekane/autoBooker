@@ -10,9 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Booking1 extends ElementHandler1 {
-    /*
 
-     */
     public Booking1(WebDriver driver) {
         super(driver);
     }

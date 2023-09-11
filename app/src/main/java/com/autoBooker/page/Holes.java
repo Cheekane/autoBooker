@@ -1,8 +1,6 @@
 package com.autoBooker.page;
 
-/*
-would be public class Holes extends enum, but its short term
- */
+// would be public class Holes extends enum, but its short term
 public enum Holes {
 
     NINE(9),
