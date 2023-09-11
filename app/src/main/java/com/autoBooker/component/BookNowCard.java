@@ -9,37 +9,54 @@ public class BookNowCard extends ElementHandler {
     private final String xPath;
     private String timeAsText;
 
+    /*
+    needs WebDriver and XPath
+     */
     public BookNowCard(WebDriver driver, String xPath) {
-        super(driver);
+        super(driver); // call parent constructor with the driver parameter "WebDriver driver"
         this.xPath = xPath;
     }
-
-    public void bookNow() {
-        String bookNowXpath = this.xPath + "//button[@class='jss405']";
-        click(By.xpath(bookNowXpath));
-    }
-
-    public int getTimeAsMin() {
-        int hrAsMin = getHr() * 60;
-        int min = getMin();
-        return hrAsMin + min;
+    /*
+    need to get the time of the BookNowCard returns timeAsText
+     */
+    public String getTimeAsString() {
+        if(this.timeAsText == null) {
+            WebElement time = getElement(By.xpath(xPath + "//p[@data-testid='teetimes-tile-time'"));
+            // uses the xPath of the BookNowCard then adds specification of the "teetimes-tile-time"
+            this.timeAsText = time.getText();
+            // get text of WebElement specifying the time
+        }
+        return this.timeAsText;
     }
 
     public int getHr() {
         String time = getTimeAsString();
-        return Integer.parseInt(time.split(":")[0]);
+        return Integer.parseInt(time.split(":")[0]); // gets the hours after splitting, hence "[0]"
+    }
+
+    /*
+    gets the hours in 24 hrs time
+     */
+    public int getFullHr() {
+        int hr;
+        String timeAsText = getTimeAsString();
+        String meridiem = timeAsText.split(" ")[1]; // splits the space between time and AM/PM
+        if(meridiem.equalsIgnoreCase("PM")) { // if time is PM then add 12 to hr
+            return hr = getHr() + 12;
+        }
+        else { // if time is AM
+            return hr = getHr();
+        }
     }
 
     public int getMin() {
         String time = getTimeAsString();
-        return Integer.parseInt(time.split(":")[1].split(" ")[0]);
+        return Integer.parseInt(time.split(":")[1]); // gets the minutes after splitting, hence "[1]"
     }
 
-    public String getTimeAsString() {
-        if (this.timeAsText == null) {
-            WebElement time = getElement(By.xpath(xPath + "//p[@class='jss388']"));
-            this.timeAsText = time.getText();
-        }
-        return this.timeAsText;
+    public int getTimeAsMin() {
+        int hr = getFullHr(), min = getMin();
+        return hr * 60 + min;
     }
+
 }

@@ -1,16 +1,19 @@
 package com.autoBooker.component;
 
-public enum TimeOfDay {
-    Morning("AM"),
-    AfterNoon("PM");
+import com.autoBooker.ElementHandler;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-    private final String description;
+public class TimeOfDay extends ElementHandler {
 
-    TimeOfDay(String description) {
-        this.description = description;
+    private final String xPath;
+
+    public TimeOfDay(WebDriver driver, String xPath) {
+        super(driver);
+        this.xPath = xPath;
     }
 
-    public String getDescription() {
-        return this.description;
+    public getTimeOfDay() {
+
     }
 }

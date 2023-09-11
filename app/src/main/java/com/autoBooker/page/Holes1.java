@@ -1,16 +1,12 @@
 package com.autoBooker.page;
 
-/*
-would be public class Holes extends enum, but its short term
- */
-public enum Holes {
-
-    NINE(9),
-    EIGHTEEN(18);
+public enum Holes1 {
+    Nine(9),
+    EightTeen(18);
 
     private final int numOfHoles;
 
-    Holes(int numOfHoles) {
+    Holes1(int numOfHoles) {
         this.numOfHoles = numOfHoles;
     }
 

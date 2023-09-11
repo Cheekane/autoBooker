@@ -10,23 +10,11 @@ import java.time.Duration;
 import java.util.List;
 
 public class ElementHandler {
+
     protected WebDriver driver;
 
     public ElementHandler(WebDriver driver) {
         this.driver = driver;
-    }
-
-    protected void sendKey(By by, String value) {
-        getElement(by).sendKeys(value);
-    }
-
-    public void click(By by) {
-        getElement(by).click();
-    }
-
-    public int countElements(By by) {
-        List<WebElement> elements = getElements(by);
-        return elements.size();
     }
 
     protected WebElement getElement(By by) {
@@ -37,7 +25,20 @@ public class ElementHandler {
 
     protected List<WebElement> getElements(By by) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
         return driver.findElements(by);
+    }
+
+    protected void sendKey(By by, String value) {
+        getElement(by).sendKeys(value);
+    }
+
+    protected void click(By by) {
+        getElement(by).click();
+    }
+
+    protected int countElements(By by) {
+        List<WebElement> elements = getElements(by);
+        return elements.size();
     }
 }
