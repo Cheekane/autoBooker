@@ -110,8 +110,8 @@ public class App {
 
 
     public static void main(String[] args) {
-        String email = "g.nahan75@gmail.com";
-        String password = "ar1eth2ac";
+        String email = "g";
+        String password = "a";
 
         book(email, password);
     }
