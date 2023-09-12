@@ -15,7 +15,7 @@ public class Login extends ElementHandler {
     // element By locators
     By usernameBy = By.id("txtUsername");
     By passwordBy = By.id("txtPassword");
-    By loginButtonBy = By.xpath("//button[@data-testid='login-button'");
+    By loginButtonBy = By.xpath("//button[@data-testid=\"login-button\"]");
 
     // navi to login page and maximize window
     public void navTo() {
@@ -34,5 +34,4 @@ public class Login extends ElementHandler {
     public void clickLogin() {
         click(loginButtonBy);
     }
-
 }

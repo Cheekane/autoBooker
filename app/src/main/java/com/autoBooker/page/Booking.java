@@ -15,9 +15,9 @@ public class Booking extends ElementHandler {
         super(driver);
     }
 
-    public void navTo(GolfCourse course, String bookDate, int golfers, int startHr, int endHr, Holes holes) {
-        String url = "https://city-of-london-golf-courses.book.teeitup.golf/?course=%d&date=%s&start=%d&end=%d&golfers=%d&holes=%d";
-        driver.get(String.format(url, course, bookDate, startHr, endHr, golfers, holes.getCount()));
+    public void navTo(GolfCourse course, Calendar bookDate, int golfers, int startHr, int endHr, Holes holes) {
+        String url = "https://city-of-london-golf-courses.book.teeitup.golf/?course=%d&date=%s&end=%d&golfers=%d&holes=%d&start=%d";
+        driver.get(String.format(url, course.getCourseId(), bookDate.getTime(), endHr, golfers, holes.getCount(), startHr));
     }
 
     public List<BookNowCard> getAvailableCards() {
