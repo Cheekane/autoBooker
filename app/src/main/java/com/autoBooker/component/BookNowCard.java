@@ -18,7 +18,7 @@ public class BookNowCard extends ElementHandler {
     // need to get the time of the BookNowCard returns timeAsText
     public String getTimeAsString() {
         if(this.timeAsText == null) {
-            WebElement time = getElement(By.xpath(xPath + "//p[@data-testid='teetimes-tile-time'"));
+            WebElement time = getElement(By.xpath(xPath + "//p[@data-testid='teetimes-tile-time']"));
             // uses the xPath of the BookNowCard then adds specification of the "teetimes-tile-time"
             this.timeAsText = time.getText();
             // get text of WebElement specifying the time

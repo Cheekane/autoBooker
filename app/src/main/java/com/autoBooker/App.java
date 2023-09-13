@@ -19,7 +19,7 @@ public class App {
 
     public static void book(String username, String password) {
 
-        int golfers = 4, startHr = 9, endHr = 10;
+        int golfers = 4, startHr = 9, endHr = 24;
 
         WebDriver driver = new ChromeDriver();
         Login loginPage = new Login(driver);

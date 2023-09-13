@@ -25,7 +25,7 @@ public class Booking extends ElementHandler {
 
         // "//" searches anywhere in the document, "/" searches the child element,
         // div searches for everywhere for div elements and have at least one child element that is a button
-        String cardXPath = "//div[@data-testid='tee-time-content-body']//button]";
+        String cardXPath = "//div[@data-testid='tee-time-content-body']//button";
         By cardsBy = By.xpath(cardXPath);
         int cardCount = countElements(cardsBy); // gets cardCount using countElements from ElementHandler
         for(int i = 1; i <= cardCount; i++) { // selenium starts at [1]
