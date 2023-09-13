@@ -14,7 +14,7 @@ public enum Golfers {
         this.golfersNum = golfersNum;
     }
 
-    public int golfersNum() {
+    public int getNum() {
         return this.golfersNum;
     }
 }

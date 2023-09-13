@@ -11,8 +11,8 @@ public class GolfersSelection extends ElementHandler {
         super(driver);
     }
 
-    public void click(int golfersNum) {
-        By golfersBy = By.xpath("//div[@data-testid=\"player-count\"]//button[" + (golfersNum - 1) + "]");
+    public void click(Golfers golfersNum) {
+        By golfersBy = By.xpath("//div[@data-testid=\"player-count\"]//button[" + (golfersNum.getNum() - 1) + "]");
         click(golfersBy); // gets golfersNum - 1 index of buttons available
     }
 

@@ -1,10 +1,7 @@
 package com.autoBooker;
 
 import com.autoBooker.component.BookNowCard;
-import com.autoBooker.page.Booking;
-import com.autoBooker.page.GolfCourse;
-import com.autoBooker.page.Holes;
-import com.autoBooker.page.Login;
+import com.autoBooker.page.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,7 +49,11 @@ public class App {
         if(closestCard != null) {
             closestCard.bookNow();
         }
+
+        GolfersSelection golfersSelection = new GolfersSelection(driver);
+        golfersSelection.click(Golfers.FOUR);
     }
+
 
     public static void main(String[] args) {
         String username = "username";
