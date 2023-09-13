@@ -51,7 +51,7 @@ public class BookNowCard extends ElementHandler {
         String min = time.split(":")[1];
         String minAsString = min.split(" ")[0];
         return Integer.parseInt(minAsString); // gets the minutes after splitting, hence "[1]"
-    } // bug suspect AM/PM is trying to be turned into an integers
+    }
 
     public int getTimeAsMin() {
         int hr = getFullHr(), min = getMin();

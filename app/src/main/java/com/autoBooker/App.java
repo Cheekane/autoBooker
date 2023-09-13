@@ -32,8 +32,6 @@ public class App {
 
         Calendar nextWeek = Calendar.getInstance();
         nextWeek.add(Calendar.DAY_OF_WEEK, 7);
-//        SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        String bookDate = simpleFormat.format(nextWeek);
         bookingPage.navTo(GolfCourse.ThamesClassic, nextWeek, golfers, startHr, endHr, Holes.EIGHTEEN);
         List<BookNowCard> availableCards = bookingPage.getAvailableCards();
 
