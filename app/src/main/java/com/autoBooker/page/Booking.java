@@ -28,8 +28,8 @@ public class Booking extends ElementHandler {
         String cardXPath = "//div[@data-testid='tee-time-content-body']//button";
         By cardsBy = By.xpath(cardXPath);
         int cardCount = countElements(cardsBy); // gets cardCount using countElements from ElementHandler
-        for(int i = 1; i <= cardCount; i++) { // selenium starts at [1]
-            cards.add(new BookNowCard(driver, cardXPath + "[" + i + "]")); // searches for 1 - i cardXPath findings
+        for(int id = 1; id <= cardCount; id++) { // selenium starts at [1]
+            cards.add(new BookNowCard(driver, cardXPath, id)); // searches for card with bookNowButton and adds
         }
         return cards;
     }

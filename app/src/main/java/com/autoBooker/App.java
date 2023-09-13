@@ -54,10 +54,9 @@ public class App {
         golfersSelection.click(Golfers.FOUR);
     }
 
-
     public static void main(String[] args) {
-        String username = "username";
-        String password = "password";
+        String username = "g.nahan75@gmail.com";
+        String password = "ar1eth2ac";
 
         book(username, password);
     }
