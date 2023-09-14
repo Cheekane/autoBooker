@@ -8,17 +8,19 @@ import org.openqa.selenium.WebElement;
 public class BookNowCard extends ElementHandler {
     private final String xPath;
     private String timeAsText;
+    private final int id;
 
     // needs WebDriver and XPath
-    public BookNowCard(WebDriver driver, String xPath) {
+    public BookNowCard(WebDriver driver, String xPathButton, int id) {
         super(driver); // call parent constructor with the driver parameter "WebDriver driver"
-        this.xPath = xPath;
+        this.xPath = xPathButton;
+        this.id = id;
     }
 
     // need to get the time of the BookNowCard returns timeAsText
     public String getTimeAsString() {
         if(this.timeAsText == null) {
-            WebElement time = getElement(By.xpath(xPath + "//p[@data-testid='teetimes-tile-time'"));
+            WebElement time = getElement(By.xpath("//div[@data-testid='tee-time-content-body']/div[@style]//p[@data-testid='teetimes-tile-time'][" + id + "]"));
             // uses the xPath of the BookNowCard then adds specification of the "teetimes-tile-time"
             this.timeAsText = time.getText();
             // get text of WebElement specifying the time
@@ -46,7 +48,9 @@ public class BookNowCard extends ElementHandler {
 
     public int getMin() {
         String time = getTimeAsString();
-        return Integer.parseInt(time.split(":")[1]); // gets the minutes after splitting, hence "[1]"
+        String min = time.split(":")[1];
+        String minAsString = min.split(" ")[0];
+        return Integer.parseInt(minAsString); // gets the minutes after splitting, hence "[1]"
     }
 
     public int getTimeAsMin() {
@@ -55,6 +59,6 @@ public class BookNowCard extends ElementHandler {
     }
 
     public void bookNow() {
-        click(By.xpath(this.xPath));
-    }
+        click(By.xpath(this.xPath + "[" + id + "]"));
+    } // clicks on the xpath element with the index as the id
 }

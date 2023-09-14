@@ -32,8 +32,6 @@ public class App {
 
         Calendar nextWeek = Calendar.getInstance();
         nextWeek.add(Calendar.DAY_OF_WEEK, 7);
-//        SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd"); // when concatenating, java knows it the time should be in String format
-//        String bookDate = simpleFormat.format(nextWeek.getTime());
         bookingPage.navTo(GolfCourse.ThamesClassic, nextWeek, golfers, startHr, endHr, Holes.EIGHTEEN);
         List<BookNowCard> availableCards = bookingPage.getAvailableCards();
 
@@ -50,15 +48,13 @@ public class App {
             closestCard.bookNow();
         }
 
-        Golfers golfersNum = new Golfers(driver);
-        golfersNum.click(4);
-
-
+        GolfersSelection golfersSelection = new GolfersSelection(driver);
+        golfersSelection.click(Golfers.FOUR);
     }
 
     public static void main(String[] args) {
-        String username = "g.nahan75@gmail.com";
-        String password = "ar1eth2ac";
+        String username = "username";
+        String password = "password";
 
         book(username, password);
     }

@@ -25,11 +25,11 @@ public class Booking extends ElementHandler {
 
         // "//" searches anywhere in the document, "/" searches the child element,
         // div searches for everywhere for div elements and have at least one child element that is a button
-        String cardXPath = "//div[@data-testid='tee-time-content-body']/div[@style]//div[button]]"; // the xpath doesnt seem to work
+        String cardXPath = "//div[@data-testid='tee-time-content-body']//button";
         By cardsBy = By.xpath(cardXPath);
         int cardCount = countElements(cardsBy); // gets cardCount using countElements from ElementHandler
-        for(int i = 1; i <= cardCount; i++) { // selenium starts at [1]
-            cards.add(new BookNowCard(driver, cardXPath + "[" + i + "]")); // searches for 1 - i cardXPath findings
+        for(int id = 1; id <= cardCount; id++) { // selenium starts at [1]
+            cards.add(new BookNowCard(driver, cardXPath, id)); // searches for card with bookNowButton and adds
         }
         return cards;
     }
