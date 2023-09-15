@@ -1,9 +1,9 @@
 package com.autoBooker.component;
 
 import com.autoBooker.ElementHandler;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+
+import javax.xml.xpath.XPathException;
 
 public class BookNowCard extends ElementHandler {
     private final String xPath;
@@ -20,10 +20,15 @@ public class BookNowCard extends ElementHandler {
     // need to get the time of the BookNowCard returns timeAsText
     public String getTimeAsString() {
         if(this.timeAsText == null) {
-            WebElement time = getElement(By.xpath("//div[@data-testid='tee-time-content-body']/div[@style]//p[@data-testid='teetimes-tile-time'][" + id + "]"));
-            // uses the xPath of the BookNowCard then adds specification of the "teetimes-tile-time"
-            this.timeAsText = time.getText();
-            // get text of WebElement specifying the time
+            try {
+                WebElement time = getElement(By.xpath("//div[@data-testid='tee-time-content-body']/div[@style]//p[@data-testid='teetimes-tile-time']"));
+                // uses the xPath of the BookNowCard then adds specification of the "teetimes-tile-time"
+                this.timeAsText = time.getText();
+                // get text of WebElement specifying the time
+            }
+            catch (NotFoundException e) {
+
+            }
         }
         return this.timeAsText;
     }

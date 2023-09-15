@@ -15,6 +15,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 public class App {
 
     public static void book(String username, String password) {
@@ -36,10 +38,11 @@ public class App {
         List<BookNowCard> availableCards = bookingPage.getAvailableCards();
 
         BookNowCard closestCard = null;
+
         for(BookNowCard card : availableCards) {
             int closestTime = Integer.MAX_VALUE;
             int tenAM = 10 * 60; // 10 AM in minutes
-            int difference = tenAM - card.getTimeAsMin();
+            int difference = abs(tenAM - card.getTimeAsMin());
             if(difference < closestTime) {
                 closestCard = card;
             }
@@ -55,6 +58,7 @@ public class App {
     public static void main(String[] args) {
         String username = "username";
         String password = "password";
+
 
         book(username, password);
     }
