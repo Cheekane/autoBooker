@@ -3,6 +3,7 @@ package com.autoBooker;
 import com.autoBooker.component.BookNowCard;
 import com.autoBooker.page.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,6 +15,8 @@ import java.time.Duration;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static java.lang.Math.abs;
 
 public class App {
 
@@ -31,23 +34,31 @@ public class App {
         Booking bookingPage = new Booking(driver);
 
         Calendar nextWeek = Calendar.getInstance();
-        nextWeek.add(Calendar.DAY_OF_WEEK, 7);
+        nextWeek.add(Calendar.DAY_OF_WEEK, 6);
         bookingPage.navTo(GolfCourse.ThamesClassic, nextWeek, golfers, startHr, endHr, Holes.EIGHTEEN);
         List<BookNowCard> availableCards = bookingPage.getAvailableCards();
 
         BookNowCard closestCard = null;
-        for(BookNowCard card : availableCards) {
-            int closestTime = Integer.MAX_VALUE;
-            int tenAM = 10 * 60; // 10 AM in minutes
-            int difference = tenAM - card.getTimeAsMin();
-            if(difference < closestTime) {
-                closestCard = card;
+        // the card may become unavailable if someone books it and produces an error if that happens when trying to add BookNowCard
+        while (true) {
+            try {
+                for (BookNowCard card : availableCards) {
+                    int closestTime = Integer.MAX_VALUE;
+                    int tenAM = 10 * 60; // 10 AM in minutes
+                    int difference = abs(tenAM - card.getTimeAsMin());
+                    if (difference < closestTime) {
+                        closestCard = card;
+                    }
+                }
+                if (closestCard != null) {
+                    closestCard.bookNow();
+                }
+                break;
+            }
+            catch (NoSuchElementException e) {
+                availableCards = bookingPage.getAvailableCards();
             }
         }
-        if(closestCard != null) {
-            closestCard.bookNow();
-        }
-
         GolfersSelection golfersSelection = new GolfersSelection(driver);
         golfersSelection.click(Golfers.FOUR);
     }

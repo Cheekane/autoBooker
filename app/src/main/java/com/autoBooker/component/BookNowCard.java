@@ -5,25 +5,30 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class BookNowCard extends ElementHandler {
-    private final String xPath;
+    private final List<WebElement> buttonList, timeList;
     private String timeAsText;
     private final int id;
 
     // needs WebDriver and XPath
-    public BookNowCard(WebDriver driver, String xPathButton, int id) {
+    public BookNowCard(WebDriver driver, List<WebElement> buttonList, List<WebElement> timeList, int id) {
         super(driver); // call parent constructor with the driver parameter "WebDriver driver"
-        this.xPath = xPathButton;
+        this.buttonList = buttonList;
+        this.timeList = timeList;
         this.id = id;
+    }
+
+    public List<WebElement> getWebElementList(By by) {
+        return getElements(by);
     }
 
     // need to get the time of the BookNowCard returns timeAsText
     public String getTimeAsString() {
         if(this.timeAsText == null) {
-            WebElement time = getElement(By.xpath("//div[@data-testid='tee-time-content-body']/div[@style]//p[@data-testid='teetimes-tile-time'][" + id + "]"));
-            // uses the xPath of the BookNowCard then adds specification of the "teetimes-tile-time"
-            this.timeAsText = time.getText();
-            // get text of WebElement specifying the time
+            this.timeAsText = timeList.get(id).getText();
+            // get text of WebElement specifying the time, *get() for ArrayList
         }
         return this.timeAsText;
     }
@@ -59,6 +64,6 @@ public class BookNowCard extends ElementHandler {
     }
 
     public void bookNow() {
-        click(By.xpath(this.xPath + "[" + id + "]"));
+        buttonList.get(id).click();
     } // clicks on the xpath element with the index as the id
 }
