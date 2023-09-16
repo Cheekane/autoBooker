@@ -72,8 +72,8 @@ public class App {
     }
 
     public static void main(String[] args) {
-        String username = "user";
-        String password = "pass";
+        String username = "username";
+        String password = "password";
 
         book(username, password);
     }
