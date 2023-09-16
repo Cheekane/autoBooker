@@ -30,6 +30,12 @@ public class ElementHandler {
         return driver.findElements(by);
     }
 
+    // waits for visibility of element located before throwing exception
+    protected void waitForElement(By by) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
     protected void sendKey(By by, String value) {
         getElement(by).sendKeys(value);
     }

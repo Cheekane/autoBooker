@@ -5,7 +5,9 @@ import com.autoBooker.component.BookNowCard;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,10 +19,11 @@ public class Booking extends ElementHandler {
         super(driver);
     }
 
-    public void navTo(GolfCourse course, Calendar bookDate, int golfers, int startHr, int endHr, Holes holes) {
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+    public void navTo(GolfCourse course, Calendar bookDate, int endHr, Golfers golfers, Holes holes, int startHr) {
+        By profileBy = By.xpath("//button[@data-testid='core-user-profile']"); // implicitly waits for the account to be logged in properly
+        waitForElement(profileBy);
         String url = "https://city-of-london-golf-courses.book.teeitup.golf/?course=%d&date=%s&end=%d&golfers=%d&holes=%d&start=%d";
-        driver.get(String.format(url, course.getCourseId(), bookDate.getTime(), endHr, golfers, holes.getCount(), startHr));
+        driver.get(String.format(url, course.getCourseId(), bookDate.getTime(), endHr, golfers.getNum(), holes.getCount(), startHr));
     }
 
     public List<BookNowCard> getAvailableCards() {

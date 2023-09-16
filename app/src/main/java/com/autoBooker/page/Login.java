@@ -3,6 +3,7 @@ package com.autoBooker.page;
 import com.autoBooker.ElementHandler;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.concurrent.TimeUnit;
 

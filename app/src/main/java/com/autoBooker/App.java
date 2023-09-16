@@ -22,7 +22,7 @@ public class App {
 
     public static void book(String username, String password) {
 
-        int golfers = 4, startHr = 9, endHr = 24;
+        int startHr = 9, endHr = 11;
 
         WebDriver driver = new ChromeDriver();
         Login loginPage = new Login(driver);
@@ -34,8 +34,8 @@ public class App {
         Booking bookingPage = new Booking(driver);
 
         Calendar nextWeek = Calendar.getInstance();
-        nextWeek.add(Calendar.DAY_OF_WEEK, 6);
-        bookingPage.navTo(GolfCourse.ThamesClassic, nextWeek, golfers, startHr, endHr, Holes.EIGHTEEN);
+        nextWeek.add(Calendar.DAY_OF_WEEK, 7);
+        bookingPage.navTo(GolfCourse.ThamesClassic, nextWeek, endHr, Golfers.FOUR, Holes.EIGHTEEN, startHr);
         List<BookNowCard> availableCards = bookingPage.getAvailableCards();
 
         BookNowCard closestCard = null;
@@ -63,11 +63,17 @@ public class App {
         BookingOptions bookingOptions = new BookingOptions(driver);
         bookingOptions.clickGolfers(Golfers.FOUR);
         bookingOptions.clickCheckout();
+
+        Terms terms = new Terms(driver);
+        terms.clickTerms();
+
+        CompletePurchase purchase = new CompletePurchase(driver);
+        purchase.clickPurchase();
     }
 
     public static void main(String[] args) {
-        String username = "username";
-        String password = "password";
+        String username = "user";
+        String password = "pass";
 
         book(username, password);
     }
