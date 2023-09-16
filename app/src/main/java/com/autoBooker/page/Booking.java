@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Booking extends ElementHandler {
 
@@ -17,6 +18,7 @@ public class Booking extends ElementHandler {
     }
 
     public void navTo(GolfCourse course, Calendar bookDate, int golfers, int startHr, int endHr, Holes holes) {
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         String url = "https://city-of-london-golf-courses.book.teeitup.golf/?course=%d&date=%s&end=%d&golfers=%d&holes=%d&start=%d";
         driver.get(String.format(url, course.getCourseId(), bookDate.getTime(), endHr, golfers, holes.getCount(), startHr));
     }
@@ -35,7 +37,7 @@ public class Booking extends ElementHandler {
         List<WebElement> timeList = getElements(cardTimeBy);
 
         int cardCount = countElements(cardButtonBy); // gets cardCount using countElements from ElementHandler
-        for(int id = 1; id <= cardCount; id++) { // selenium starts at [1]
+        for(int id = 0; id < cardCount; id++) {
             cards.add(new BookNowCard(driver, buttonList, timeList, id)); // searches for card with bookNowButton and adds
         }
         return cards;

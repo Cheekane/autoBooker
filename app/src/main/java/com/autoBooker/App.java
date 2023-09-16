@@ -42,11 +42,12 @@ public class App {
         // the card may become unavailable if someone books it and produces an error if that happens when trying to add BookNowCard
         while (true) {
             try {
+                int closestDiff = Integer.MAX_VALUE;
                 for (BookNowCard card : availableCards) {
-                    int closestTime = Integer.MAX_VALUE;
                     int tenAM = 10 * 60; // 10 AM in minutes
                     int difference = abs(tenAM - card.getTimeAsMin());
-                    if (difference < closestTime) {
+                    if (difference < closestDiff) {
+                        closestDiff = difference;
                         closestCard = card;
                     }
                 }
@@ -59,8 +60,9 @@ public class App {
                 availableCards = bookingPage.getAvailableCards();
             }
         }
-        GolfersSelection golfersSelection = new GolfersSelection(driver);
-        golfersSelection.click(Golfers.FOUR);
+        BookingOptions bookingOptions = new BookingOptions(driver);
+        bookingOptions.clickGolfers(Golfers.FOUR);
+        bookingOptions.clickCheckout();
     }
 
     public static void main(String[] args) {
