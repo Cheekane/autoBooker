@@ -2,20 +2,13 @@ package com.autoBooker.page;
 
 import com.autoBooker.ElementHandler;
 import com.autoBooker.component.BookNowCard;
-import net.bytebuddy.build.Plugin;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.abs;
 

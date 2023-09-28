@@ -1,15 +1,10 @@
 package com.autoBooker;
 
-import com.autoBooker.component.BookNowCard;
 import com.autoBooker.page.*;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.Calendar;
-import java.util.List;
-
-import static java.lang.Math.abs;
 
 public class App {
 
