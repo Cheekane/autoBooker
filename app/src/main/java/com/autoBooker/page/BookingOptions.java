@@ -9,18 +9,27 @@ import java.util.List;
 
 public class BookingOptions extends ElementHandler {
 
-    By checkoutBy = By.xpath("//button[@data-testid='modal-rate-proceed-to-checkout-btn']");
+    By addToCartBy = By.xpath("//button[@data-testid='add-to-cart-button']");
+    By checkoutBy = By.xpath("//button[@data-testid='shopping-cart-drawer-checkout-btn']");
 
+    // uses the same WebDriver to handle booking options
     public BookingOptions(WebDriver driver) {
         super(driver);
     }
 
+    // clicks on number of golfers from golf booking card
     public void clickGolfers(Golfers golfers) {
-        By golfersBy = By.xpath("//div[@class='MuiDialogContent-root']//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12']//button[@type='button']");
-        List<WebElement> golfersButtonList = getElements(golfersBy);
-        golfersButtonList.get(2).click(); // gets golfersNum - 2 index of buttons available because array start = 0
+        By golfersBy = By.xpath("//button[@data-testid='golfer-select-button-" + golfers.getNum() + "']");
+        click(golfersBy);
     }
 
+    // clicks on add to cart button
+    public void clickAddToCart() {
+        click(addToCartBy);
+        waitForElement(checkoutBy);
+    }
+
+    // clicks on shopping cart checkout button
     public void clickCheckout() {
         click(checkoutBy);
     }

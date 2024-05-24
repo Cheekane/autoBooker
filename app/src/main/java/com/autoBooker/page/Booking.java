@@ -19,8 +19,9 @@ public class Booking extends ElementHandler {
     }
 
     public void navTo(GolfCourse course, Calendar bookDate, int endHr, Golfers golfers, Holes holes, int startHr) {
-        By profileBy = By.xpath("//button[@data-testid='core-user-profile']"); // implicitly waits for the account to be logged in properly
-        waitForElement(profileBy);
+        By profileBy = By.xpath("//button[@data-testid='core-user-profile']");
+        waitForElement(profileBy); // implicitly waits for the account to be logged in properly
+
         String url = "https://city-of-london-golf-courses.book.teeitup.golf/?course=%d&date=%s&end=%d&golfers=%d&holes=%d&start=%d";
         driver.get(String.format(url, course.getCourseId(), bookDate.getTime(), endHr, golfers.getNum(), holes.getCount(), startHr));
     }
@@ -30,11 +31,11 @@ public class Booking extends ElementHandler {
 
         // "//" searches anywhere in the document, "/" searches the child element,
         // div searches for everywhere for div elements and have at least one child element that is a button
-        String buttonXPath = "//div[@data-testid='tee-time-content-body']//button";
+        String buttonXPath = "//div[@data-testid='tee-time-TeeTimeContent-body']//button";
         By cardButtonBy = By.xpath(buttonXPath);
         List<WebElement> buttonList = getElements(cardButtonBy);
 
-        String timeXPath = "//div[@data-testid='tee-time-content-body']/div[@style]//p[@data-testid='teetimes-tile-time']";
+        String timeXPath = "//div[@data-testid='tee-time-TeeTimeContent-body']//p[@data-testid='teetimes-tile-time']";
         By cardTimeBy = By.xpath(timeXPath);
         List<WebElement> timeList = getElements(cardTimeBy);
 

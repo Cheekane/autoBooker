@@ -8,9 +8,13 @@ import java.util.Calendar;
 
 public class App {
 
+    /*
+    Takes tee time username and password and navigates through golf tee time Booking webpage
+     */
     public static void book(String username, String password) {
 
-        int startHr = 9, endHr = 11;
+        // start hours and end hours to search for
+        int startHr = 9, endHr = 24;
 
         WebDriver driver = new ChromeDriver();
         Login loginPage = new Login(driver);
@@ -28,6 +32,7 @@ public class App {
 
         BookingOptions bookingOptions = new BookingOptions(driver);
         bookingOptions.clickGolfers(Golfers.FOUR);
+        bookingOptions.clickAddToCart();
         bookingOptions.clickCheckout();
 
         Terms terms = new Terms(driver);

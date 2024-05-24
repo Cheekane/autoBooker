@@ -18,8 +18,8 @@ public class Login extends ElementHandler {
     }
 
     // element By locators
-    By usernameBy = By.id("txtUsername");
-    By passwordBy = By.id("txtPassword");
+    By usernameBy = By.xpath("//input[@data-testid=\"login-email-component\"]");
+    By passwordBy = By.xpath("//input[@data-testid=\"login-password-component\"]");
     By loginButtonBy = By.xpath("//button[@data-testid=\"login-button\"]");
 
     // navi to login page and maximize window
