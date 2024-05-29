@@ -1,7 +1,5 @@
 package com.autoBooker.page;
 
-import org.openqa.selenium.WebDriver;
-
 public enum Golfers {
     TWO(2),
     THREE(3),

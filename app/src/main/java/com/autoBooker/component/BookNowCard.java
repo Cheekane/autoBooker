@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static java.lang.Math.abs;
+
 public class BookNowCard extends ElementHandler {
     private final List<WebElement> buttonList, timeList;
     private String timeAsText;

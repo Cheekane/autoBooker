@@ -19,15 +19,21 @@ public class ElementHandler {
 
     // gets element and waits for presenceOfElementLocated for 10 seconds
     protected WebElement getElement(By by) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
         return driver.findElement(by);
     }
 
     protected List<WebElement> getElements(By by) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
         return driver.findElements(by);
+    }
+
+    // waits for visibility of element located before throwing exception
+    protected void waitForElement(By by) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
     protected void sendKey(By by, String value) {

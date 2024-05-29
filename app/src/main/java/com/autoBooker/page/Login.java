@@ -3,6 +3,11 @@ package com.autoBooker.page;
 import com.autoBooker.ElementHandler;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.sleep;
 
 // needs to use ElementHandler to wait for the webpage, sendKeys and click
 public class Login extends ElementHandler {
@@ -13,8 +18,8 @@ public class Login extends ElementHandler {
     }
 
     // element By locators
-    By usernameBy = By.id("txtUsername");
-    By passwordBy = By.id("txtPassword");
+    By usernameBy = By.xpath("//input[@data-testid=\"login-email-component\"]");
+    By passwordBy = By.xpath("//input[@data-testid=\"login-password-component\"]");
     By loginButtonBy = By.xpath("//button[@data-testid=\"login-button\"]");
 
     // navi to login page and maximize window
