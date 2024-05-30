@@ -43,8 +43,8 @@ public class App {
     }
 
     public static void main(String[] args) {
-        String username = "g.nahan75@gmail.com"; 
-        String password = "ar1eth2ac";
+        String username = "username";
+        String password = "password";
 
         book(username, password);
     }
