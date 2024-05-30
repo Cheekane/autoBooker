@@ -3,9 +3,6 @@ package com.autoBooker.page;
 import com.autoBooker.ElementHandler;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class BookingOptions extends ElementHandler {
 
@@ -19,7 +16,7 @@ public class BookingOptions extends ElementHandler {
 
     // clicks on number of golfers from golf booking card
     public void clickGolfers(Golfers golfers) {
-        By golfersBy = By.xpath("//button[@data-testid='golfer-select-button-" + golfers.getNum() + "']");
+        By golfersBy = By.xpath("//input[@data-testid='golfer-select-radio-" + golfers.getNum() + "']");
         click(golfersBy);
     }
 
