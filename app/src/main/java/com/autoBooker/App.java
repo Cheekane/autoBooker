@@ -26,7 +26,7 @@ public class App {
         Booking bookingPage = new Booking(driver);
 
         Calendar nextWeek = Calendar.getInstance();
-        nextWeek.add(Calendar.DAY_OF_WEEK, 6);
+        nextWeek.add(Calendar.DAY_OF_WEEK, 7);
         bookingPage.navTo(GolfCourse.ThamesClassic, nextWeek, endHr, Golfers.FOUR, Holes.EIGHTEEN, startHr);
         bookingPage.getClosestCard().bookNow();
 
@@ -43,8 +43,8 @@ public class App {
     }
 
     public static void main(String[] args) {
-        String username = "username";
-        String password = "password";
+        String username = "user";
+        String password = "pass";
 
         book(username, password);
     }
